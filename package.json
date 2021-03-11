@@ -1,0 +1,28 @@
+{
+  "name": "bookr",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sidxd/bookr.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sidxd/bookr/issues"
+  },
+  "homepage": "https://github.com/sidxd/bookr#readme",
+  "dependencies": {
+    "mongoose": "^5.12.0",
+    "polka": "^0.5.2"
+  }
+}
