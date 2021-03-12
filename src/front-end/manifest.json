@@ -4,13 +4,13 @@
     "description": "Save the amazing websites you like along with their framework, fonts and a lot more!",
     "version": "1.0",
     "icons": {
-        "128": "assets/logos/Logo-128x128.png",
-        "64": "assets/logos/Logo-64x64.png",
-        "32": "assets/logos/Logo-32x32.png"
+        "128": "./assets/logo-128x128.png",
+        "64": "./assets/logo-64x64.png",
+        "32": "./assets/logo-32x32.png"
     },
     "browser_action": {
         "default_tooltip": "Bookr",
-        "default_icon": "assets/logos/Logo-16x16.png",
+        "default_icon": "./assets/logo-16x16.png",
         "default_popup": "window.html"
     },
     "permissions": [

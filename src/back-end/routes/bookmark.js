@@ -9,7 +9,9 @@ const
 
 router
     .post('/api/v1/bookmarks', (request, response) => {
-        console.log('Hi!');
+        /* TODO: */
+        /* 1: authentication, - authenticate the request before doing anything. */
+        /* 2. use parameters for the schema. */
         const
              bookmark = new Bookmark({
                  _id: new mongoose.Types.ObjectId,
