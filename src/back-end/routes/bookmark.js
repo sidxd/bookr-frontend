@@ -12,6 +12,7 @@ router
         /* TODO: */
         /* 1: authentication, - authenticate the request before doing anything. */
         /* 2. use parameters for the schema. */
+        console.log(request.body);
         const
              bookmark = new Bookmark({
                  _id: new mongoose.Types.ObjectId,
@@ -32,6 +33,10 @@ router
             .save()
                 .then(() => {
                     console.log('Bookmark has been uploaded to the db!');
+                    response.json({
+                        "Status": 200,
+                        "Message": 'OK'
+                    });
                 });
 
         // response

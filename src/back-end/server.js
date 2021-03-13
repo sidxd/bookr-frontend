@@ -6,11 +6,13 @@ const
     dotenv = require('dotenv')
         .config({ path: '../../.env' }),
     express = require('express'),
+    bodyParser = require('body-parser'),
     mongoose = require('mongoose');
 
 /* ROUTES: */
 const
-    bookmark = require('./routes/bookmark');
+     bookmark = require('./routes/bookmark'),
+     authGoogle = require('./routes/authentication');
 
 const
      URI = `mongodb+srv://admin:${process.env.MONGOOSE_PW}@bookr0.bchzj.mongodb.net/testing?retryWrites=true&w=majority`,
@@ -25,8 +27,14 @@ mongoose
         const
              app = express();
 
+             /* MIDDLEWARE: */
              app
-                .use(bookmark);
+                .use(bodyParser.json());
+
+             /* ROUTES: */
+             app
+                .use(bookmark)
+                .use(authGoogle);
 
              app
                 .listen(process.env.PORT || port, () => {
