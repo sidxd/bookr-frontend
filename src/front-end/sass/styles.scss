@@ -78,7 +78,7 @@ body {
     user-select: none;
     background-color: #2F80ED;
     font-size: 12px;
-    font-weight: 700;
+    font-weight: 500;
     transition: background-color 0.2s;
 
     &:hover {
@@ -129,13 +129,17 @@ body {
 .searchbar {
     height: 35px;
     padding: 10px;
-    border: 2px solid #2c2e30;
+    border: 1px solid #2c2e30;
     width: 80%;
     border-radius: 4px;
     margin: 10px 30px 20px 30px;
     background-color: #232425;
     color: #ffffff;
     display: none;
+
+    &:focus {
+        border: 1px solid #707070;
+    }
 }
 
 .navbar {

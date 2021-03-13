@@ -53,15 +53,23 @@ addButton.addEventListener("click", () => {
     })
 })
 
+// Handle button events on navbar.
+
+const actionsContainer = document.querySelector(".action-buttons")
 const searchButton = document.querySelector(".search")
 const recentsButton = document.querySelector(".recent")
+const searchBar = document.querySelector(".searchbar")
 
 searchButton.addEventListener("click", () => {
     searchButton.classList.add("active__link")
     recentsButton.classList.remove("active__link")
+    searchBar.style.display = "block"
+    actionsContainer.style.display = "none"
 })
 
 recentsButton.addEventListener("click", () => {
     recentsButton.classList.add("active__link")
     searchButton.classList.remove("active__link")
+    searchBar.style.display = "none"
+    actionsContainer.style.display = "block"
 })
