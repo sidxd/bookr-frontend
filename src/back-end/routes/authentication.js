@@ -56,7 +56,8 @@ router
     })
     .get('/api/v1/auth/logout', (request, response) => {
         request.logout();
-        response.redirect('/');
+
+        response.send('Successfully logged out! You can now close this window.');
     });
     
 module.exports = router;
