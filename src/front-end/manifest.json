@@ -11,7 +11,7 @@
     "browser_action": {
         "default_tooltip": "Bookr",
         "default_icon": "./assets/logo-16x16.png",
-        "default_popup": "window.html"
+        "default_popup": "login.html"
     },
     "permissions": [
         "tabs",
