@@ -37,7 +37,6 @@ passport.deserializeUser((user, done) => {
     done(null, user);
 });
 
-/* write a middleware here to check if the user is logged in. */
 const isUserLoggedIn = (request, response, next) => {
     if(!request.user) return response.send('You must log in to continue!');
     
