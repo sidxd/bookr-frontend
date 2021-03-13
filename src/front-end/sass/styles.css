@@ -5,6 +5,7 @@
           box-sizing: border-box;
   font-family: 'Roboto', 'san-serif';
   outline: none;
+  text-decoration: none;
 }
 
 body {
@@ -89,8 +90,8 @@ body {
   margin: 10px 30px 20px 30px;
 }
 
-.action-buttons .action__button,
-.action-buttons .action__button--secondary {
+.action__button,
+.action__button--secondary {
   cursor: pointer;
   width: 115px;
   height: 35px;
@@ -103,36 +104,82 @@ body {
           user-select: none;
   background-color: #2F80ED;
   font-size: 12px;
-  font-weight: 700;
+  font-weight: 500;
   -webkit-transition: background-color 0.2s;
   transition: background-color 0.2s;
 }
 
-.action-buttons .action__button:hover,
-.action-buttons .action__button--secondary:hover {
+.action__button:hover,
+.action__button--secondary:hover {
   background-color: #0560d8;
 }
 
-.action-buttons .action__button--secondary {
+.action__button--secondary {
   background-color: #232425;
   -webkit-transition: background-color 0.2s;
   transition: background-color 0.2s;
 }
 
-.action-buttons .action__button--secondary:hover {
+.action__button--secondary:hover {
   background-color: #2c2e30;
+}
+
+.signin__container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin: auto 30px;
+}
+
+.signin__button {
+  width: 240px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  background-color: #ffffff;
+  position: relative;
+  margin: 20px auto;
+}
+
+.signin__button:hover {
+  background-color: #ddd;
+}
+
+.signin__button svg {
+  margin: auto 10px;
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+}
+
+.signin__button p {
+  color: #444;
+  margin: auto;
 }
 
 .searchbar {
   height: 35px;
   padding: 10px;
-  border: 2px solid #2c2e30;
+  border: 1px solid #2c2e30;
   width: 80%;
   border-radius: 4px;
   margin: 10px 30px 20px 30px;
   background-color: #232425;
   color: #ffffff;
   display: none;
+}
+
+.searchbar:focus {
+  border: 1px solid #707070;
 }
 
 .navbar {
