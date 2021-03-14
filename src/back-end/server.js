@@ -9,10 +9,11 @@ require('dotenv')
 const
      express = require('express'),
      mongoose = require('mongoose'),
+     { nanoid } = require('nanoid'),
 
      /* MIDDLEWARE: */
      { auth, requiresAuth } = require('express-openid-connect'),
-     bodyParser = require('body-parser');
+     session = require('express-session');
 
 /* ROUTES: */
 const
@@ -29,7 +30,6 @@ mongoose
 
              /* MIDDLEWARE: */
              app
-                .use(bodyParser.json())
                 .use(auth({
                     routes: {
                         login: false,
@@ -43,9 +43,12 @@ mongoose
                     secret: process.env.AUTH0_SECRET
                 }));
 
-             /* ROUTES: */
-             app
-                .use(bookmark);
+            //  app
+            //     .use(session({
+            //         secret: nanoid(),
+            //         resave: false,
+            //         saveUninitialized: false
+            //     }));
 
              /* CUSTOM AUTH0 REDIRECTS.: */ // CAN BE CUSTOMIZED LATER.
              app
@@ -53,8 +56,16 @@ mongoose
                 .get('/api/v1/auth/logout', (request, response) => response.oidc.logout({ returnTo: '/' }))
 
                 .get('/', (request, response) => {
+                    /* TODO: authentication. */
+                    // when the user is authenticated, generate a token that will be used for them to send post request's to the server.
+                    // this token then will be destroyed from the client when they logged out, and will be retrieved from the database when their logged in.
+                                        
                     response.send(request.oidc.isAuthenticated() ? 'Successfully logged in!' : 'Successfully logged out!');
                 });
+
+             /* ROUTES: */
+             app
+                .use(bookmark);
             
              app
                 .listen(process.env.SERVER_PORT, () => {
