@@ -50,7 +50,7 @@ mongoose
              /* CUSTOM AUTH0 REDIRECTS.: */ // CAN BE CUSTOMIZED LATER.
              app
                 .get('/api/v1/auth/login', (request, response) => response.oidc.login({ returnTo: '/' }))
-                .get('/api/v1/auth/logout', (request, response) => response.oidc.login({ returnTo: '/' }))
+                .get('/api/v1/auth/logout', (request, response) => response.oidc.logout({ returnTo: '/' }))
 
                 .get('/', (request, response) => {
                     response.send(request.oidc.isAuthenticated() ? 'Successfully logged in!' : 'Successfully logged out!');
