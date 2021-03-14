@@ -1,25 +1,25 @@
 /* eslint-disable indent */
 /* eslint-disable no-extra-semi */
 
+/* DEV-DEPENDENCIES */
+require('dotenv')
+    .config({ path: '../../.env' });
+
 /* DEPENDENCIES: */
 const
-    dotenv = require('dotenv')
-        .config({ path: '../../.env' }),
-    express = require('express'),
-    bodyParser = require('body-parser'),
-    mongoose = require('mongoose');
+     express = require('express'),
+     mongoose = require('mongoose'),
+
+     /* MIDDLEWARE: */
+     { auth, requiresAuth } = require('express-openid-connect'),
+     bodyParser = require('body-parser');
 
 /* ROUTES: */
 const
-     bookmark = require('./routes/bookmark'),
-     authGoogle = require('./routes/authentication');
-
-const
-     URI = `mongodb+srv://admin:${process.env.MONGOOSE_PW}@bookr0.bchzj.mongodb.net/testing?retryWrites=true&w=majority`,
-     port = process.env.PORT || 6969;
+     bookmark = require('./routes/bookmark');
 
 mongoose
-    .connect(URI, {
+    .connect(process.env.MONGOOSE_URI, {
         useNewUrlParser: true,
         useUnifiedTopology: true
     })
@@ -29,15 +29,31 @@ mongoose
 
              /* MIDDLEWARE: */
              app
-                .use(bodyParser.json());
+                .use(bodyParser.json())
+                .use(auth({
+                    authRequired: false,
+                    auth0Logout: true,
+                    issuerBaseURL: process.env.AUTH0_ISSUER_BASE_URL,
+                    baseURL: process.env.AUTH0_BASE_URL,
+                    clientID: process.env.AUTH0_CLIENT_ID,
+                    secret: process.env.AUTH0_SECRET
+                }));
 
              /* ROUTES: */
              app
-                .use(bookmark)
-                .use(authGoogle);
+                .use(bookmark);
 
+             /* TESTING: */
              app
-                .listen(process.env.PORT || port, () => {
+                .get('/', (request, response) => {
+                    response.send(request.oidc.isAuthenticated() ? 'Logged in.' : 'Logged out.');
+                })
+                .get('/profile', requiresAuth(), (request, response) => {
+                    response.send(JSON.stringify(request.oidc.user));
+                });
+            
+             app
+                .listen(process.env.SERVER_PORT, () => {
                     console.log('The server has started!');
                 });
     });
