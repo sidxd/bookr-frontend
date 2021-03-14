@@ -3,16 +3,21 @@
 
 const
      express = require('express'),
+     router = express.Router(),
      mongoose = require('mongoose'),
-     Bookmark = require('../models/bookmark'),
-     router = express.Router();
+
+     /* MIDDLEWARE: */
+     bodyParser = require('body-parser'),
+
+     /* MONGOOSE MODELS: */
+     Bookmark = require('../models/bookmark');
 
 router
-    .post('/api/v1/bookmarks', (request, response) => {
+    .post('/api/v1/bookmark', (request, response) => {
         /* TODO: */
         /* 1: authentication, - authenticate the request before doing anything. */
         /* 2. use parameters for the schema. */
-        console.log(request.body);
+ 
         const
              bookmark = new Bookmark({
                  _id: new mongoose.Types.ObjectId,
@@ -38,11 +43,6 @@ router
                         "Message": 'OK'
                     });
                 });
-
-        // response
-        //     .json({
-        //         "message": "Hello, World!"
-        //     });
     });
 
 module.exports = router;
