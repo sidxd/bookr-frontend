@@ -7,9 +7,10 @@ A bookmarking tool for web designers.
 ### Frontend
 
 - [x] Add searchbar. (only visually)
-- [ ] Add get descriptions from website code.
+- [ ] Add descriptions from website code.
 - [ ] Limit characters in title and descriptions.
-- [ ] Implement logic for searchbar
+- [ ] Implement logic for searchbar.
+- [ ] Prevent duplicate sites.
 
 ### Backend
 
