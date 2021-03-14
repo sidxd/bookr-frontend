@@ -31,6 +31,10 @@ mongoose
              app
                 .use(bodyParser.json())
                 .use(auth({
+                    routes: {
+                        login: false,
+                        logout: false
+                    },
                     authRequired: false,
                     auth0Logout: true,
                     issuerBaseURL: process.env.AUTH0_ISSUER_BASE_URL,
@@ -43,13 +47,13 @@ mongoose
              app
                 .use(bookmark);
 
-             /* TESTING: */
+             /* CUSTOM AUTH0 REDIRECTS.: */ // CAN BE CUSTOMIZED LATER.
              app
+                .get('/api/v1/auth/login', (request, response) => response.oidc.login({ returnTo: '/' }))
+                .get('/api/v1/auth/logout', (request, response) => response.oidc.login({ returnTo: '/' }))
+
                 .get('/', (request, response) => {
-                    response.send(request.oidc.isAuthenticated() ? 'Logged in.' : 'Logged out.');
-                })
-                .get('/profile', requiresAuth(), (request, response) => {
-                    response.send(JSON.stringify(request.oidc.user));
+                    response.send(request.oidc.isAuthenticated() ? 'Successfully logged in!' : 'Successfully logged out!');
                 });
             
              app
