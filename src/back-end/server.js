@@ -5,17 +5,19 @@
 require('dotenv')
     .config({ path: '../../.env' });
 
-/* DEPENDENCIES: */
 const
-     express = require('express'),
-     
+     /* DEPENDENCIES: */
      mongoose = require('mongoose'),
+     express = require('express'),
+     { v4: uuidv4 } = require('uuid'),
 
      /* MIDDLEWARE: */
-     { auth } = require('express-openid-connect'),
 
      /* ROUTES: */
-     bookmark = require('./routes/bookmark');
+     bookmark = require('./routes/bookmark'),
+
+     /* MONGOOSE MODELS: */
+     User = require('./models/user');
 
 mongoose
     .connect(process.env.MONGOOSE_URI, {
@@ -24,30 +26,68 @@ mongoose
     })
     .then(() => {
         const
-             app = express();
+             app = express(),
+             passport = require('passport'),
+             GoogleStrategy = require('passport-google-oauth20').Strategy,
+             cookieSession = require('cookie-session');
 
              /* MIDDLEWARE: */
-             app
-                .use(auth({
-                    routes: {
-                        login: false,
-                        logout: false
-                    },
-                    authRequired: false,
-                    auth0Logout: true,
-                    issuerBaseURL: process.env.AUTH0_ISSUER_BASE_URL,
-                    baseURL: process.env.AUTH0_BASE_URL,
-                    clientID: process.env.AUTH0_CLIENT_ID,
-                    secret: process.env.AUTH0_SECRET
+
+             passport
+                .use(new GoogleStrategy({
+                    clientID: process.env.GOOGLE_CLIENT_ID,
+                    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+                    callbackURL: '/api/v1/auth/google/redirect'
+                }, (accessToken, refreshToken, profile, done) => {
+                    console.log(profile);
+                    User
+                        .findOne({ user: { id: profile.id } })
+                            .then((user) => {
+                                if(!user) {
+                                    return new User({
+                                        _id: new mongoose.Types.ObjectId,
+                                        user: {
+                                            id: profile.id
+                                        }
+                                    }).save().then((nu) =>{
+                                        done(null, nu);
+                                    });
+                                };
+
+                                done(null, user);
+                            });
                 }));
 
-             /* CUSTOM AUTH0 REDIRECTS.: */ // CAN BE CUSTOMIZED LATER.
-             app
-                .get('/api/v1/auth/login', (request, response) => response.oidc.login({ returnTo: '/' }))
-                .get('/api/v1/auth/logout', (request, response) => response.oidc.logout({ returnTo: '/' }))
+                passport
+                    .serializeUser((user, done) => {
+                        done(null, user.id);
+                    });
 
-                .get('/', (request, response) => {
-                    response.send(request.oidc.isAuthenticated() ? 'Successfully logged in!' : 'Successfully logged out!');
+                passport
+                    .deserializeUser((id, done) => {
+                        User.findById(id).then((user) => {
+                            done(null, user);
+                        });
+                    });
+
+                app
+                    .use(cookieSession({
+                        maxAge: 24*60*60*1000,
+                        keys: [ uuidv4() ]
+                    }))
+                    .use(passport.initialize())
+                    .use(passport.session());
+
+             app
+                .get('/api/v1/auth/google/login', passport.authenticate('google', {
+                    scope: ['profile', 'email']
+                }))
+                .get('/api/v1/auth/google/redirect', passport.authenticate('google'), (request, response) => {
+                    response.send('Successfully logged in!');
+                })
+                .get('/api/v1/auth/google/logout', (request, response) => {
+                    request.logOut();
+                    response.send('Successfully logged out!');
                 });
 
              /* ROUTES: */
