@@ -21,9 +21,8 @@ passport
     }, (accessToken, refreshToken, profile, done) => {
         User
             .findOneAndUpdate({
-                user: { id: profile.id }
+                'user.id': profile.id
             }, {
-                _id: new mongoose.Types.ObjectId,
                 user: {
                     email: profile.emails,
                     id: profile.id
