@@ -51,7 +51,7 @@ passport
 
 router
     .use(cookieSession({
-        maxAge: 24*60*60*1000,
+        maxAge: 24 * 60 * 60 * 1000,
         keys: [ uuidv4() ]
     }))
     .use(passport.initialize())

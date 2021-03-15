@@ -5,7 +5,6 @@ const
 
 const 
      userSchema = mongoose.Schema({
-         _id: mongoose.Schema.Types.ObjectId,
          user: {
              email: Array,
              id: String,
