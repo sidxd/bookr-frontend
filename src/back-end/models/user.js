@@ -11,4 +11,4 @@ const
          }
      });
 
-module.exports = mongoose.model('UserSchema', userSchema);
+module.exports = mongoose.model('User', userSchema);

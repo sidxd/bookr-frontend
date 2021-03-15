@@ -2,7 +2,6 @@ const
     /* DEPENDENCIES: */
     express = require('express'),
     router = express.Router(),
-    mongoose = require('mongoose'),
     { v4: uuidv4 } = require('uuid'),
     passport = require('passport'),
     GoogleStrategy = require('passport-google-oauth20').Strategy,
