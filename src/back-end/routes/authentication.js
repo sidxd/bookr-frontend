@@ -19,21 +19,22 @@ passport
         clientSecret: process.env.GOOGLE_CLIENT_SECRET,
         callbackURL: '/api/v1/auth/google/redirect'
     }, (accessToken, refreshToken, profile, done) => {
+        console.log(profile);
         User
-            .findOne({ user: { id: profile.id } })
-            .then((user) => {
-                if(!user) {
-                    return new User({
-                        _id: new mongoose.Types.ObjectId,
-                        user: {
-                            email: profile.emails,
-                            id: profile.id
-                        }
-                    }).save().then((nu) =>{
-                        done(null, nu);
-                    });
+            .findOneAndUpdate({
+                user: { id: profile.id }
+            }, {
+                _id: new mongoose.Types.ObjectId,
+                user: {
+                    email: profile.emails,
+                    id: profile.id
                 }
+            }, {
+                upsert: true,
+                new: true,
 
+            }).then((user) => {
+                
                 done(null, user);
             });
     }));
