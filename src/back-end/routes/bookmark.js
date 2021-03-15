@@ -1,48 +1,50 @@
+/* eslint-disable no-extra-semi */
 /* eslint-disable quotes */
 /* eslint-disable indent */
 
 const
      express = require('express'),
      router = express.Router(),
+
      mongoose = require('mongoose'),
+     
+     axios = require('axios'),
 
      /* MIDDLEWARE: */
-     bodyParser = require('body-parser'),
 
      /* MONGOOSE MODELS: */
      Bookmark = require('../models/bookmark');
 
+/* MIDDLEWARE: */
+
 router
     .post('/api/v1/bookmark', (request, response) => {
-        /* TODO: */
-        /* 1: authentication, - authenticate the request before doing anything. */
-        /* 2. use parameters for the schema. */
- 
-        const
-             bookmark = new Bookmark({
-                 _id: new mongoose.Types.ObjectId,
-                user: {
-                    id: '12390812'
-                },
-                bookmark: {
-                    title: 'test',
-                    link: 'https://google.com',
-                    description: 'test',
-                    thumbnail: 'test',
-                    dateAdded: Date.now(),
-                    recent: true
-                }
-        });
+        console.log('Hello, World!');
+        // const
+        //      bookmark = new Bookmark({
+        //          _id: new mongoose.Types.ObjectId,
+        //         user: {
+        //             id: '12390812'
+        //         },
+        //         bookmark: {
+        //             title: 'test',
+        //             link: 'https://google.com',
+        //             description: 'test',
+        //             thumbnail: 'test',
+        //             dateAdded: Date.now(),
+        //             recent: true
+        //         }
+        // });
 
-        bookmark
-            .save()
-                .then(() => {
-                    console.log('Bookmark has been uploaded to the db!');
-                    response.json({
-                        "Status": 200,
-                        "Message": 'OK'
-                    });
-                });
+        // bookmark
+        //     .save()
+        //         .then(() => {
+        //             console.log('Bookmark has been uploaded to the db!');
+        //             response.json({
+        //                 "Status": 200,
+        //                 "Message": 'OK'
+        //             });
+        //         });
     });
 
 module.exports = router;

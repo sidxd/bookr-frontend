@@ -22,10 +22,17 @@
   },
   "homepage": "https://github.com/sidxd/bookr#readme",
   "dependencies": {
+    "axios": "^0.21.1",
+    "cookie-session": "^1.4.0",
     "express": "^4.17.1",
     "express-openid-connect": "^2.3.0",
     "express-session": "^1.17.1",
-    "mongoose": "^5.11.15"
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.11.15",
+    "nanoid": "^3.1.21",
+    "passport": "^0.4.1",
+    "passport-google-oauth": "^2.0.0",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "eslint": "^7.21.0",
