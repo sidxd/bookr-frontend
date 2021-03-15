@@ -1,19 +1,13 @@
-/* eslint-disable no-extra-semi */
-/* eslint-disable quotes */
-/* eslint-disable indent */
-
 const
-     express = require('express'),
-     router = express.Router(),
+    express = require('express'),
+    router = express.Router(),
 
-     mongoose = require('mongoose'),
-     
-     axios = require('axios'),
+    mongoose = require('mongoose'),
 
-     /* MIDDLEWARE: */
+    /* MIDDLEWARE: */
 
-     /* MONGOOSE MODELS: */
-     Bookmark = require('../models/bookmark');
+    /* MONGOOSE MODELS: */
+    Bookmark = require('../models/bookmark');
 
 /* MIDDLEWARE: */
 
