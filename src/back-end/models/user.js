@@ -8,6 +8,8 @@ const
          user: {
              email: Array,
              id: String,
+             token: String,
+             bookmarks: Array
          }
      });
 

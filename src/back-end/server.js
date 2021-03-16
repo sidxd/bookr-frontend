@@ -26,7 +26,8 @@ mongoose
             app = express();
 
         /* MIDDLEWARE: */
-
+        app
+            .use(express.json());
         /* ROUTES: */
         app
             .use(authentication)

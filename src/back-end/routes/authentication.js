@@ -2,10 +2,10 @@ const
     /* DEPENDENCIES: */
     express = require('express'),
     router = express.Router(),
-    { v4: uuidv4 } = require('uuid'),
     passport = require('passport'),
     GoogleStrategy = require('passport-google-oauth20').Strategy,
     cookieSession = require('cookie-session'),
+    { v4: uuidv4 } = require('uuid'),
      
     /* MIDDLEWARE: */
 
@@ -18,20 +18,25 @@ passport
         clientSecret: process.env.GOOGLE_CLIENT_SECRET,
         callbackURL: '/api/v1/auth/google/redirect'
     }, (accessToken, refreshToken, profile, done) => {
+        /* the payload is the user's token when making post request's to the server, and will be stored in the browser via cookies. */
+
+        /* the secret is also stored in the browser via a cookie, we will compare this to the one in the db. */
+        
         User
             .findOneAndUpdate({
                 'user.id': profile.id
             }, {
                 user: {
                     email: profile.emails,
-                    id: profile.id
+                    id: profile.id,
+                    token: uuidv4(),
+                    bookmarks: []
                 }
             }, {
                 upsert: true,
                 new: true,
 
             }).then((user) => {
-                
                 done(null, user);
             });
     }));
