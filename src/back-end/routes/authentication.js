@@ -18,10 +18,9 @@ passport
         clientSecret: process.env.GOOGLE_CLIENT_SECRET,
         callbackURL: '/api/v1/auth/google/redirect'
     }, (accessToken, refreshToken, profile, done) => {
-        /* the payload is the user's token when making post request's to the server, and will be stored in the browser via cookies. */
+        /* TODO: store token in client browser. */
+        const token = uuidv4();
 
-        /* the secret is also stored in the browser via a cookie, we will compare this to the one in the db. */
-        
         User
             .findOneAndUpdate({
                 'user.id': profile.id
@@ -29,7 +28,7 @@ passport
                 user: {
                     email: profile.emails,
                     id: profile.id,
-                    token: uuidv4(),
+                    token: token,
                     bookmarks: []
                 }
             }, {
