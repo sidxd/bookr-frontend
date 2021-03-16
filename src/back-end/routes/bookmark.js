@@ -35,13 +35,11 @@ router
                 },
                 {
                     new: true
-                }, (error, document) => {
-                    // if(error) return response.status(404).send('Token is not associated with any user.');
-
-                    console.log(error);
-                    // console.log(document);
-                    response.status(200).send('OK!');
-                });
+                }).then((document) => {
+                if(!document) return response.status(404).send('Token is not associated with any user!.');
+    
+                response.status(200).send('OK!');
+            });
     });
 
 module.exports = router;
