@@ -295,8 +295,18 @@ body {
           animation: animateIn 0.6s;
 }
 
+.sites-list .site .site-favicon {
+  height: 18px;
+  width: 18px;
+  background-color: #d8056e;
+  border-radius: 5px;
+  margin: auto;
+  position: absolute;
+  top: 16px;
+  left: 16px;
+}
+
 .sites-list .site .site-title {
-  font-family: 'Poppins', sans-serif;
   color: #ffffff;
   font-size: 14px;
   margin: 16px 32px 16px 16px;
@@ -305,6 +315,7 @@ body {
   width: -moz-fit-content;
   width: fit-content;
   font-weight: 500;
+  margin-left: 40px;
 }
 
 .sites-list .site .site-title:hover {
@@ -314,12 +325,19 @@ body {
 .sites-list .site .expand-box {
   cursor: pointer;
   position: absolute;
+  width: 25px;
+  height: 25px;
   right: 16px;
-  top: 24px;
+  top: 12px;
   background: none;
   border: none;
+  border-radius: 5px;
   -webkit-transition: 0.2s;
   transition: 0.2s;
+}
+
+.sites-list .site .expand-box:hover {
+  background-color: #393A3C;
 }
 
 .sites-list .site .expand-box:hover svg path {
@@ -333,9 +351,8 @@ body {
 
 .sites-list .site .site-desc {
   color: #cccccc;
-  font-size: 10px;
+  font-size: 12px;
   margin: 0 16px 16px 16px;
-  font-family: 'Poppins', sans-serif;
   display: none;
 }
 
@@ -343,7 +360,7 @@ body {
   margin: 0 16px 16px 16px;
   max-width: 240px;
   height: auto;
-  border-radius: 2px;
+  border-radius: 5px;
   display: none;
 }
 
@@ -358,22 +375,30 @@ body {
   text-transform: capitalize;
   width: 25px;
   height: 25px;
-  border: 1px solid #FC5E66;
+  border: none;
   border-radius: 5px;
   background-color: transparent;
-  margin: 0 0 16px 16px;
-  -webkit-transition: background-color 0.2s;
-  transition: background-color 0.2s;
+  -webkit-transition: background-color 0.2s, background-image 0.2s;
+  transition: background-color 0.2s, background-image 0.2s;
   position: absolute;
   right: 44px;
   top: 50%;
   -webkit-transform: translateY(-50%);
           transform: translateY(-50%);
-  background: url(../assets/delete.svg);
-  background-size: contain;
+  background: url(../assets/delete.svg) no-repeat;
+  background-position: center;
 }
 
 .sites-list .site .site-remove:hover {
   background-color: #FC5E66;
+  background-image: url(../assets/delete-white.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.sites-list .site .site-remove__expanded {
+  border: 1px solid #FC5E66;
+  position: unset;
+  margin: 16px 16px 0 auto;
 }
 /*# sourceMappingURL=styles.css.map */
