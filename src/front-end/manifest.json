@@ -16,5 +16,8 @@
     "permissions": [
         "tabs",
         "activeTab"
-    ]
+    ],
+    "background" : {
+        "scripts" : ["./js/background.js"]
+    }
 }

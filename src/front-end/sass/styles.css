@@ -1,3 +1,4 @@
+@import url(https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800);
 * {
   margin: 0;
   padding: unset;
@@ -261,8 +262,8 @@ body {
 .box-out {
   -webkit-transform: translateX(-200px);
           transform: translateX(-200px);
-  -webkit-transition: 0.2s;
-  transition: 0.2s;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
   opacity: 0;
 }
 
@@ -286,14 +287,16 @@ body {
       -ms-flex-direction: column;
           flex-direction: column;
   background-color: #232425;
+  border: 1px solid #393A3C;
   position: relative;
   border-radius: 8px;
   margin: 7px 0;
-  -webkit-animation: animateIn 0.4s;
-          animation: animateIn 0.4s;
+  -webkit-animation: animateIn 0.6s;
+          animation: animateIn 0.6s;
 }
 
 .sites-list .site .site-title {
+  font-family: 'Poppins', sans-serif;
   color: #ffffff;
   font-size: 14px;
   margin: 16px 32px 16px 16px;
@@ -301,6 +304,7 @@ body {
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
+  font-weight: 500;
 }
 
 .sites-list .site .site-title:hover {
@@ -311,7 +315,7 @@ body {
   cursor: pointer;
   position: absolute;
   right: 16px;
-  top: 16px;
+  top: 24px;
   background: none;
   border: none;
   -webkit-transition: 0.2s;
@@ -329,8 +333,10 @@ body {
 
 .sites-list .site .site-desc {
   color: #cccccc;
-  font-size: 12px;
+  font-size: 10px;
   margin: 0 16px 16px 16px;
+  font-family: 'Poppins', sans-serif;
+  display: none;
 }
 
 .sites-list .site .site-img {
@@ -350,20 +356,24 @@ body {
 .sites-list .site .site-remove {
   cursor: pointer;
   text-transform: capitalize;
-  width: 60px;
-  height: 20px;
-  font-size: 10px;
-  font-weight: 500;
-  color: #ffffff;
-  border: none;
-  border-radius: 2px;
-  background-color: #313233;
+  width: 25px;
+  height: 25px;
+  border: 1px solid #FC5E66;
+  border-radius: 5px;
+  background-color: transparent;
   margin: 0 0 16px 16px;
   -webkit-transition: background-color 0.2s;
   transition: background-color 0.2s;
+  position: absolute;
+  right: 44px;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  background: url(../assets/delete.svg);
+  background-size: contain;
 }
 
 .sites-list .site .site-remove:hover {
-  background-color: #3b3c3d;
+  background-color: #FC5E66;
 }
 /*# sourceMappingURL=styles.css.map */

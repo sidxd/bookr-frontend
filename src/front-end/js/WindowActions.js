@@ -1,6 +1,8 @@
 // Add site.
-addButton.addEventListener("click", () => {
 
+// Add site function.
+
+const addSite = () => {
     const siteList = document.querySelector(".sites-list") //.. List of all bookmarked sites.
     const siteBox = document.createElement("li") //............. Create the container for a bookmark.
     const siteTitle = document.createElement("h5") //........... Create title of the site.
@@ -27,10 +29,11 @@ addButton.addEventListener("click", () => {
     siteBox.style.display = "flex"
     expandButton.innerHTML = `<svg width="12" height="7" viewBox="0 0 12 7" fill="none"><path d="M11 1L6 6L1 1" stroke="#696969" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`
     siteDesc.innerHTML = "Lorem Ipsum has been the industry's standard dummy text ever..." // Remove this in production.
-    removeBox.innerHTML = "remove"
+    // removeBox.innerHTML = "../assets/deleve.svg"
 
     chrome.tabs.query({currentWindow: true, active: true}, // Can probably be smaller.
     (tab) => {
+    //    favIconURL = "chrome://favicon/size/16@1x/" + tab[0].url
         siteTitle.innerHTML = tab[0].title
         siteUrl = tab[0].url
     })
@@ -50,7 +53,12 @@ addButton.addEventListener("click", () => {
     expandButton.addEventListener("click", () => {
         siteCapture.classList.toggle("full-view")
         expandButton.classList.toggle("rotate")
+        siteDesc.classList.toggle("full-view")
     })
+}
+
+addButton.addEventListener("click", () => {
+    addSite()
 })
 
 // Handle button events on navbar.
