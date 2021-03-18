@@ -15,7 +15,9 @@
     },
     "permissions": [
         "tabs",
-        "activeTab"
+        "activeTab",
+        "chrome://favicon/*",
+        "<all_urls>"
     ],
     "background" : {
         "scripts" : ["./js/background.js"]

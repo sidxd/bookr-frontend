@@ -13,7 +13,8 @@ const addSite = () => {
     const siteDesc = document.createElement("p") //............. Create description (To be changed).
     const siteCapture = document.createElement("img") //.......... Create image screenshot.
     const removeBox = document.createElement("button") //....... Create "remove" button.
-    const siteFavicon = document.createElement("p")
+    const siteFavicon = document.createElement("img")
+    let siteUrl = ''
 
     siteBox.classList.add("site")
     siteTitle.classList.add("site-title")
@@ -33,7 +34,7 @@ const addSite = () => {
     expandButton.innerHTML = `<svg width="12" height="7" viewBox="0 0 12 7" fill="none"><path d="M11 1L6 6L1 1" stroke="#696969" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`
     siteDesc.innerHTML = "Lorem Ipsum has been the industry's standard dummy text ever..." // Remove this in production.
     // removeBox.innerHTML = "../assets/delete.svg"
-    siteFavicon.src = ""
+    // siteFavicon.src = ""
 
     chrome.tabs.captureVisibleTab(1, {}, (imageData) => siteCapture.src = imageData)
 
@@ -41,13 +42,22 @@ const addSite = () => {
 
     chrome.tabs.query({currentWindow: true, active: true}, // Can probably be smaller.
     (tab) => {
-        //favIconURL = "chrome://favicon/size/16@1x/" + tab[0].url
         siteTitle.innerHTML = tab[0].title
         if(siteTitle.innerHTML.length > 16) {
-            console.log("lol")
             siteTitle.innerHTML = `${siteTitle.innerHTML.substring(0, 14)}...`
         }
         siteUrl = tab[0].url
+    })
+
+    chrome.tabs.query({
+        "active": true, //fetch active tabs
+        "currentWindow": true, //fetch tabs in current window
+        "status": "complete", //fetch completely loaded windows
+        "windowType": "normal" //fetch normal windows
+    }, function (tabs) {
+        for (tab in tabs) {
+            siteFavicon.src = tabs[tab].favIconUrl// Use this URL as needed
+        }
     })
 
     siteTitle.addEventListener("click", () => {
@@ -56,14 +66,14 @@ const addSite = () => {
 
     siteList.prepend(siteBox)
     siteListArr.push(siteBox)
-    console.log(siteListArr)
+    // console.log(siteListArr)
     removeBox.addEventListener("click", () => {
-        if(window.confirm(`Are you sure you want to delete ${siteTitle.innerHTML}?`)) {  
-            siteBox.classList.add("box-out")
-            setTimeout(() => {
-                siteList.removeChild(siteBox)
-            }, 200)
-        }
+        // if(window.confirm(`Are you sure you want to delete ${siteTitle.innerHTML}?`)) 
+        // {  }
+        siteBox.classList.add("box-out")
+        setTimeout(() => {
+            siteList.removeChild(siteBox)
+        }, 200)
     })
 
     expandButton.addEventListener("click", () => {
