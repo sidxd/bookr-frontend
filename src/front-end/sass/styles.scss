@@ -214,7 +214,7 @@ body {
         display: flex;
         flex-direction: column;
         background-color: #232425;
-        border: 1px solid #393A3C;
+        //border: 1px solid #363636;
         position: relative;
         border-radius: 8px;
         margin: 7px 0;
@@ -228,13 +228,13 @@ body {
             margin: auto;
             position: absolute;
             top: 16px;
-            left: 16px;
+            left: 14px;
         }
 
         .site-title {
             color: #ffffff;
             font-size: 14px;
-            margin: 16px 32px 16px 16px;
+            margin: 17px 30px 17px 14px;
             cursor: pointer;
             width: fit-content;
             font-weight: 500;
@@ -250,8 +250,8 @@ body {
             position: absolute;
             width: 25px;
             height: 25px;
-            right: 16px;
-            top: 12px;
+            right: 14px;
+            top: 13px;
             background: none;
             border: none;
             border-radius: 5px;
@@ -272,14 +272,15 @@ body {
         .site-desc {
             color: #cccccc;
             font-size: 12px;
-            margin: 0 16px 16px 16px;
+            margin: 0 14px 16px 14px;
             display: none;
         }
 
         .site-img {
-            margin: 0 16px 16px 16px;
+            margin: 0 14px 16px 14px;
             max-width: 240px;
             height: auto;
+            max-height: 120px;
             border-radius: 5px;
             display: none;
         }
@@ -315,7 +316,7 @@ body {
         .site-remove__expanded {
             border: 1px solid #FC5E66;
             position: unset;
-            margin: 16px 16px 0 auto;
+            margin: 8px 14px 0 auto;
         }
     }
 }

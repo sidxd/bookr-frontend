@@ -43,9 +43,9 @@ const addSite = () => {
     (tab) => {
         //favIconURL = "chrome://favicon/size/16@1x/" + tab[0].url
         siteTitle.innerHTML = tab[0].title
-        if(siteTitle.innerHTML.length > 20) {
+        if(siteTitle.innerHTML.length > 16) {
             console.log("lol")
-            siteTitle.innerHTML = `${siteTitle.innerHTML.substring(0, 16)}...`
+            siteTitle.innerHTML = `${siteTitle.innerHTML.substring(0, 14)}...`
         }
         siteUrl = tab[0].url
     })
@@ -58,10 +58,12 @@ const addSite = () => {
     siteListArr.push(siteBox)
     console.log(siteListArr)
     removeBox.addEventListener("click", () => {
-        siteBox.classList.add("box-out")
-        setTimeout(() => {
-            siteList.removeChild(siteBox)
-        }, 200)
+        if(window.confirm(`Are you sure you want to delete ${siteTitle.innerHTML}?`)) {  
+            siteBox.classList.add("box-out")
+            setTimeout(() => {
+                siteList.removeChild(siteBox)
+            }, 200)
+        }
     })
 
     expandButton.addEventListener("click", () => {
