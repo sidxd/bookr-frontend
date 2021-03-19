@@ -86,8 +86,21 @@ const addSite = () => {
 
 addButton.addEventListener("click", () => {
     addSite()
-})
 
+    chrome.tabs.query (
+        { active: true },
+        function(tabs) {
+          const { id: tabId } = tabs[0].url;
+      
+          let code = `
+          document.querySelector("meta[name='description']").getAttribute("content")
+          `
+          chrome.tabs.executeScript(tabId, { code }, function (result) {
+            console.log(result)
+          })
+        }
+    )}
+)
 // Handle button events on navbar.
 
 const actionsContainer = document.querySelector(".action-buttons")
