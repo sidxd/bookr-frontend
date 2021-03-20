@@ -145,13 +145,13 @@ body {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  background-color: #ffffff;
+  background-color: #4285F4;
   position: relative;
   margin: 20px auto;
 }
 
 .signin__button:hover {
-  background-color: #ddd;
+  background-color: #2070f1;
 }
 
 .signin__button svg {
@@ -163,7 +163,7 @@ body {
 }
 
 .signin__button p {
-  color: #444;
+  color: white;
   margin: auto;
 }
 
