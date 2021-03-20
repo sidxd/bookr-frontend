@@ -4,15 +4,71 @@
 
 const siteListArr = []
 
+const header = document.querySelector(".header")
+const actionButtons = document.querySelector(".action-buttons")
+const searchbar = document.querySelector(".searchbar")
+const navbar = document.querySelector(".navbar")
+
+handleDelete = () => {
+
+    if(document.querySelector('.delete-container')) return
+
+    const deleteContainer = document.createElement("div")
+    const deleteText = document.createElement("p")
+    const deleteOptions = document.createElement("nav")
+    const deleteConfirm = document.createElement("button")
+    const deleteCancel = document.createElement("button")
+
+    deleteContainer.classList.add("delete-container")
+    deleteText.classList.add("delete-text")
+    deleteOptions.classList.add("delete-options")
+    deleteConfirm.classList.add("delete-yes")
+    deleteCancel.classList.add("delete-no")
+
+    document.body.appendChild(deleteContainer)
+    deleteContainer.appendChild(deleteText)
+    deleteContainer.appendChild(deleteOptions)
+    deleteOptions.appendChild(deleteConfirm)
+    deleteOptions.appendChild(deleteCancel)
+
+    deleteText.innerHTML = "Confirm deletion."
+    deleteCancel.innerHTML = "No"
+    deleteConfirm.innerHTML = "Yes"
+
+    const ghostbox = document.querySelector(".ghostbox")
+    ghostbox.style.pointerEvents = "none"
+    ghostbox.classList.add("darker")
+
+    deleteConfirm.addEventListener("click", () => {
+        siteBox.classList.add("box-out")
+        setTimeout(() => {
+            siteList.removeChild(siteBox)
+        }, 200)
+        document.body.removeChild(deleteContainer)
+        ghostbox.style.pointerEvents = "all"
+        ghostbox.classList.remove("darker")
+    })
+
+    deleteCancel.addEventListener("click", () => {
+        document.body.removeChild(deleteContainer)
+        ghostbox.style.pointerEvents = "all"
+        ghostbox.classList.remove("darker")
+    })
+}
+
+removeBox = document.createElement("button") //....... Create "remove" button.
+removeBox.classList.add("site-remove")
+removeBox.style.display = "none"
+
 const addSite = () => {
 
-    const siteList = document.querySelector(".sites-list") //.. List of all bookmarked sites.
-    const siteBox = document.createElement("li") //............. Create the container for a bookmark.
+    siteList = document.querySelector(".sites-list") //.. List of all bookmarked sites.
+    siteBox = document.createElement("li") //............. Create the container for a bookmark.
     const siteTitle = document.createElement("h5") //........... Create title of the site.
     const expandButton = document.createElement("button") //.... Create button that expands bookmark.
     const siteDesc = document.createElement("p") //............. Create description (To be changed).
     const siteCapture = document.createElement("img") //.......... Create image screenshot.
-    const removeBox = document.createElement("button") //....... Create "remove" button.
+    // removeBox = document.querySelector("site-remove") //....... Create "remove" button.
     const siteFavicon = document.createElement("img")
     let siteUrl = ''
 
@@ -21,8 +77,8 @@ const addSite = () => {
     expandButton.classList.add("expand-box")
     siteDesc.classList.add("site-desc")
     siteCapture.classList.add("site-img")
-    removeBox.classList.add("site-remove")
     siteFavicon.classList.add("site-favicon")
+    removeBox.style.display = "block"
 
     siteBox.appendChild(siteTitle)
     siteBox.appendChild(expandButton)
@@ -32,9 +88,6 @@ const addSite = () => {
     siteBox.appendChild(siteFavicon)
 
     expandButton.innerHTML = `<svg width="12" height="7" viewBox="0 0 12 7" fill="none"><path d="M11 1L6 6L1 1" stroke="#696969" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`
-    siteDesc.innerHTML = "Lorem Ipsum has been the industry's standard dummy text ever..." // Remove this in production.
-    // removeBox.innerHTML = "../assets/delete.svg"
-    // siteFavicon.src = ""
 
     chrome.tabs.captureVisibleTab(1, {}, (imageData) => siteCapture.src = imageData)
 
@@ -66,15 +119,6 @@ const addSite = () => {
 
     siteList.prepend(siteBox)
     siteListArr.push(siteBox)
-    // console.log(siteListArr)
-    removeBox.addEventListener("click", () => {
-        if(window.confirm(`Are you sure you want to delete ${siteTitle.innerHTML}?`)) {
-            siteBox.classList.add("box-out")
-            setTimeout(() => {
-                siteList.removeChild(siteBox)
-            }, 200)
-        }
-    })
 
     expandButton.addEventListener("click", () => {
         siteCapture.classList.toggle("full-view")
@@ -101,6 +145,10 @@ const addSite = () => {
         }
     )
 }
+
+removeBox.addEventListener("click", () => {
+    handleDelete()
+})
 
 addButton.addEventListener("click", () => {
     addSite()

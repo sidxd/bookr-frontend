@@ -6,29 +6,31 @@
     <script defer src="./js/WindowActions.js"></script>
 </head>
 <body>
-    <header class="header">
-        <div class="header__logo">
-            <img src="/assets/logo-dark.png" alt="logo">
-            <h1>Bookr</h1>
+    <div class="ghostbox">
+        <header class="header">
+            <div class="header__logo">
+                <img src="/assets/logo-dark.png" alt="logo">
+                <h1>Bookr</h1>
+            </div>
+            <span class="close__btn">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M11.6648 0.335205C11.8794 0.549833 12 0.840931 12 1.14446C12 1.44799 11.8794 1.73909 11.6648 1.95372L7.61851 6L11.6648 10.0463C11.8794 10.2609 12 10.552 12 10.8555C12 11.1591 11.8794 11.4502 11.6648 11.6648C11.4502 11.8794 11.1591 12 10.8555 12C10.552 12 10.2609 11.8794 10.0463 11.6648L6 7.61851L1.95372 11.6648C1.73909 11.8794 1.44799 12 1.14446 12C0.840931 12 0.549834 11.8794 0.335205 11.6648C0.120577 11.4502 0 11.1591 0 10.8555C0 10.552 0.120577 10.2609 0.335205 10.0463L4.38149 6L0.335205 1.95372C0.120577 1.73909 5.78825e-07 1.44799 5.78825e-07 1.14446C5.78825e-07 0.840931 0.120577 0.549833 0.335205 0.335205C0.549834 0.120577 0.840932 0 1.14446 0C1.44799 0 1.73909 0.120577 1.95372 0.335205L6 4.38149L10.0463 0.335205C10.2609 0.120577 10.552 0 10.8555 0C11.1591 0 11.4502 0.120577 11.6648 0.335205Z" fill="#696969"/>
+                </svg>                
+            </span>
+        </header>
+        <div class="action-buttons">
+            <button class="action__button">Add this site</button>
+            <a href="#"><button class="action__button--secondary">View all sites</button></a>
         </div>
-        <span class="close__btn">
-            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M11.6648 0.335205C11.8794 0.549833 12 0.840931 12 1.14446C12 1.44799 11.8794 1.73909 11.6648 1.95372L7.61851 6L11.6648 10.0463C11.8794 10.2609 12 10.552 12 10.8555C12 11.1591 11.8794 11.4502 11.6648 11.6648C11.4502 11.8794 11.1591 12 10.8555 12C10.552 12 10.2609 11.8794 10.0463 11.6648L6 7.61851L1.95372 11.6648C1.73909 11.8794 1.44799 12 1.14446 12C0.840931 12 0.549834 11.8794 0.335205 11.6648C0.120577 11.4502 0 11.1591 0 10.8555C0 10.552 0.120577 10.2609 0.335205 10.0463L4.38149 6L0.335205 1.95372C0.120577 1.73909 5.78825e-07 1.44799 5.78825e-07 1.14446C5.78825e-07 0.840931 0.120577 0.549833 0.335205 0.335205C0.549834 0.120577 0.840932 0 1.14446 0C1.44799 0 1.73909 0.120577 1.95372 0.335205L6 4.38149L10.0463 0.335205C10.2609 0.120577 10.552 0 10.8555 0C11.1591 0 11.4502 0.120577 11.6648 0.335205Z" fill="#696969"/>
-            </svg>                
-        </span>
-    </header>
-    <div class="action-buttons">
-        <button class="action__button">Add this site</button>
-        <a href="#"><button class="action__button--secondary">View all sites</button></a>
+        <input type="search" class="searchbar" placeholder="Search">
+        <nav class="navbar">
+            <div class="navbar__links">
+                <button class="active__link navbar__link recent">Recent</button>
+                <button class="navbar__link search">Search</button>
+            </div>
+            <div class="line"></div>
+        </nav>
+        <ul class="sites-list"></ul>
     </div>
-    <input type="search" class="searchbar" placeholder="Search">
-    <nav class="navbar">
-        <div class="navbar__links">
-            <button class="active__link navbar__link recent">Recent</button>
-            <button class="navbar__link search">Search</button>
-        </div>
-        <div class="line"></div>
-    </nav>
-    <ul class="sites-list"></ul>
 </body>
 </html>
