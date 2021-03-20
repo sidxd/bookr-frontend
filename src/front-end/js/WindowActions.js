@@ -68,12 +68,12 @@ const addSite = () => {
     siteListArr.push(siteBox)
     // console.log(siteListArr)
     removeBox.addEventListener("click", () => {
-        // if(window.confirm(`Are you sure you want to delete ${siteTitle.innerHTML}?`)) 
-        // {  }
-        siteBox.classList.add("box-out")
-        setTimeout(() => {
-            siteList.removeChild(siteBox)
-        }, 200)
+        if(window.confirm(`Are you sure you want to delete ${siteTitle.innerHTML}?`)) {
+            siteBox.classList.add("box-out")
+            setTimeout(() => {
+                siteList.removeChild(siteBox)
+            }, 200)
+        }
     })
 
     expandButton.addEventListener("click", () => {
@@ -82,10 +82,6 @@ const addSite = () => {
         siteDesc.classList.toggle("full-view")
         removeBox.classList.toggle("site-remove__expanded")
     })
-}
-
-addButton.addEventListener("click", () => {
-    addSite()
 
     chrome.tabs.query (
         { active: true },
@@ -93,14 +89,23 @@ addButton.addEventListener("click", () => {
           const { id: tabId } = tabs[0].url;
       
           let code = `
-          document.querySelector("meta[name='description']").getAttribute("content")
+          document.querySelector("meta[name=description]").getAttribute("content")
           `
           chrome.tabs.executeScript(tabId, { code }, function (result) {
-            console.log(result)
+            console.log(result[0])
+            siteDesc.innerHTML = result[0]
+            if(siteDesc.innerHTML.length > 64) {
+                siteDesc.innerHTML = `${siteDesc.innerHTML.substring(0, 64)}...`
+            }
           })
         }
-    )}
-)
+    )
+}
+
+addButton.addEventListener("click", () => {
+    addSite()
+})
+
 // Handle button events on navbar.
 
 const actionsContainer = document.querySelector(".action-buttons")
