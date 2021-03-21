@@ -57,7 +57,7 @@ handleDelete = () => {
 
 let titleStore
 
-addSite = () => {
+const addSite = async () => {
 
     siteList = getElement(".sites-list") //.. List of all bookmarked sites.
     siteBox = makeElement("li") //............. Create the container for a bookmark.
@@ -87,7 +87,7 @@ addSite = () => {
     
     // GET elements from Chrome's API.
 
-    chrome.tabs.query ({
+    FIELD: await chrome.tabs.query ({
         active : true,
         currentWindow : true,
         status : "complete",
