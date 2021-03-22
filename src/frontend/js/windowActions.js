@@ -42,7 +42,7 @@ handleDelete = () => {
         setTimeout(() => {
             siteList.removeChild(siteBox)
         }, 200)
-        siteBox.classList.remove("box-out")
+        // siteBox.classList.remove("box-out")
         document.body.removeChild(deleteContainer)
         ghostbox.style.pointerEvents = "all"
         ghostbox.classList.remove("darker")
@@ -57,8 +57,8 @@ handleDelete = () => {
 
 const addSite = () => {
 
-    var siteList = getElement(".sites-list") //.. List of all bookmarked sites.
-    var siteBox = makeElement("li") //............. Create the container for a bookmark.
+    siteList = getElement(".sites-list") //.. List of all bookmarked sites.
+    siteBox = makeElement("li") //............. Create the container for a bookmark.
     var siteTitle = makeElement("h5") //........... Create title of the site.
     var expandButton = makeElement("button") //.... Create button that expands bookmark.
     var siteDesc = makeElement("p") //............. Create description (To be changed).
@@ -94,10 +94,10 @@ const addSite = () => {
 
             siteTitle.innerHTML = tab[0].title
 
-            // LIMIT characters in title to 16.
+            // LIMIT characters in title to 14.
 
-            if(siteTitle.innerHTML.length > 16) {
-                siteTitle.innerHTML = `${siteTitle.innerHTML.substring(0, 16)}...`
+            if(siteTitle.innerHTML.length > 14) {
+                siteTitle.innerHTML = `${siteTitle.innerHTML.substring(0, 14)}...`
             }
 
             siteFavicon.src = tab[0].favIconUrl
