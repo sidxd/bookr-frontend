@@ -55,18 +55,16 @@ handleDelete = () => {
     })
 }
 
-let titleStore
+const addSite = () => {
 
-const addSite = async () => {
-
-    siteList = getElement(".sites-list") //.. List of all bookmarked sites.
-    siteBox = makeElement("li") //............. Create the container for a bookmark.
-    siteTitle = makeElement("h5") //........... Create title of the site.
-    expandButton = makeElement("button") //.... Create button that expands bookmark.
-    siteDesc = makeElement("p") //............. Create description (To be changed).
-    siteCapture = makeElement("img") //.......... Create image screenshot.
-    removeBox = makeElement("site-remove") //....... Create "remove" button.
-    siteFavicon = makeElement("img")
+    var siteList = getElement(".sites-list") //.. List of all bookmarked sites.
+    var siteBox = makeElement("li") //............. Create the container for a bookmark.
+    var siteTitle = makeElement("h5") //........... Create title of the site.
+    var expandButton = makeElement("button") //.... Create button that expands bookmark.
+    var siteDesc = makeElement("p") //............. Create description (To be changed).
+    var siteCapture = makeElement("img") //.......... Create image screenshot.
+    var removeBox = makeElement("site-remove") //....... Create "remove" button.
+    var siteFavicon = makeElement("img")
 
     siteBox.classList.add("site")
     siteTitle.classList.add("site-title")
@@ -87,21 +85,19 @@ const addSite = async () => {
     
     // GET elements from Chrome's API.
 
-    FIELD: await chrome.tabs.query ({
+    chrome.tabs.query ({
         active : true,
         currentWindow : true,
         status : "complete",
         windowType : "normal"
         }, (tab) => {
 
-            siteTitle = siteTitle.innerHTML
-            siteTitle = tab[0].title
-            titleStore = tab[0].title
+            siteTitle.innerHTML = tab[0].title
 
             // LIMIT characters in title to 16.
 
-            if(siteTitle.length > 16) {
-                siteTitle = `${siteTitle.substring(0, 16)}...`
+            if(siteTitle.innerHTML.length > 16) {
+                siteTitle.innerHTML = `${siteTitle.innerHTML.substring(0, 16)}...`
             }
 
             siteFavicon.src = tab[0].favIconUrl
@@ -131,7 +127,7 @@ const addSite = async () => {
         }
     )
 
-    console.log(titleStore)
+    siteList.prepend(siteBox)
 
     // CREATE and open link in new tab when title is clicked on.
 
